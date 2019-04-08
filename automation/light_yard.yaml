@@ -6,19 +6,21 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+      from: 'off'
       to: 'on'
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d0002bf6139
+      from: 'off'      
       to: 'on'
-    - platform: state
-      entity_id: binary_sensor.motion_sensor_158d0002583a26
-      to: 'on'
-    - platform: state
-      entity_id: device_tracker.samsunggalaxys7
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.androide080cfbd841dcb82
-      to: 'home'
+    # - platform: state
+    #   entity_id: binary_sensor.motion_sensor_158d0002583a26
+    #   to: 'on'
+    # - platform: state
+    #   entity_id: device_tracker.samsunggalaxys7
+    #   to: 'home'
+    # - platform: state
+    #   entity_id: device_tracker.androide080cfbd841dcb82
+    #   to: 'home'
   # condition:
   #   condition: or
   #   conditions:
@@ -72,34 +74,34 @@
         - automation.on_yard_light
         - automation.off_yard_light
 #
-- id: on_yard_light_coming_home
-  alias: on_yard_light_coming_home
-  hide_entity: True
-  trigger:
-    - platform: state
-      entity_id: device_tracker.android5b0bb71f36701beb
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.android97367da2dcf80ca2
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.c49a02676acf
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.samsunggalaxys7
-      to: 'home'
-  # condition: 
-  #   condition: or
-  #   conditions:
-  #     - condition: sun
-  #       after: sunset
-  #     - condition: sun
-  #       before: sunrise
-  action:
-    - service: timer.start
-      entity_id: timer.yard_coming_home
-    - service: switch.turn_on
-      entity_id: switch.sc1_yard
+# - id: on_yard_light_coming_home
+#   alias: on_yard_light_coming_home
+#   hide_entity: True
+#   trigger:
+#     - platform: state
+#       entity_id: device_tracker.android5b0bb71f36701beb
+#       to: 'home'
+#     - platform: state
+#       entity_id: device_tracker.android97367da2dcf80ca2
+#       to: 'home'
+#     - platform: state
+#       entity_id: device_tracker.c49a02676acf
+#       to: 'home'
+#     - platform: state
+#       entity_id: device_tracker.samsunggalaxys7
+#       to: 'home'
+#   # condition: 
+#   #   condition: or
+#   #   conditions:
+#   #     - condition: sun
+#   #       after: sunset
+#   #     - condition: sun
+#   #       before: sunrise
+#   action:
+#     - service: timer.start
+#       entity_id: timer.yard_coming_home
+#     - service: switch.turn_on
+#       entity_id: switch.sc1_yard
 #
 - id: off_yard_light
   alias: off_yard_light
@@ -120,17 +122,22 @@
       entity_id: binary_sensor.door_window_sensor_158d0001b145c6
       to: 'off'
       for:
-        minutes: 10
+        minutes: '10'
     - platform: state
-      entity_id: device_tracker.samsunggalaxys7
-      to: 'home'
+      entity_id: binary_sensor.door_window_sensor_158d0002bf6139
+      to: 'off'
       for:
-        minutes: 3
-    - platform: state
-      entity_id: device_tracker.androide080cfbd841dcb82
-      to: 'home'
-      for:
-        minutes: 3
+        minutes: '10'
+    # - platform: state
+    #   entity_id: device_tracker.samsunggalaxys7
+    #   to: 'home'
+    #   for:
+    #     minutes: 3
+    # - platform: state
+    #   entity_id: device_tracker.androide080cfbd841dcb82
+    #   to: 'home'
+    #   for:
+    #     minutes: 3
   action:
     - service: switch.turn_off
       entity_id: switch.sc1_yard
