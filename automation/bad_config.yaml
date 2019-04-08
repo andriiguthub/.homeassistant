@@ -1,0 +1,16 @@
+# use this file to overcome issues with connection to xiaomi hub
+- id: Bad_config
+  alias: Bad_config
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: sensor.invalid_config
+      to: 'true'
+      for:
+        seconds: 60
+  action:
+    - service: homeassistant.restart
+    - service: homeassistant.restart
+    - service: homeassistant.restart
+    - service: homeassistant.restart
+    - service: homeassistant.restart

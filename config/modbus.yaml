@@ -1,0 +1,5 @@
+# https://www.home-assistant.io/components/modbus/
+    name: epever5420
+    type: tcp
+    host: 11.11.11.254
+    port: 80

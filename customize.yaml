@@ -1,0 +1,110 @@
+binary_sensor.motion_sensor_158d000128b319:
+  friendly_name: Движение (зал)
+  icon: mdi:run
+binary_sensor.motion_sensor_158d0001d91dc9:
+  friendly_name: Движение (коридор)
+  icon: mdi:run
+binary_sensor.motion_sensor_158d0001d91d58:
+  friendly_name: Движение (2 этаж)
+  icon: mdi:run
+binary_sensor.motion_sensor_158d0001e5e3a2:
+  friendly_name: Движение (кухня)
+  icon: mdi:run
+zone.home:
+  icon: mdi:home
+persistent_notification.invalid_config:
+  icon: mdi:image-filter-tilt-shift
+device_tracker.androide080cfbd841dcb82:
+  icon: mdi:cellphone-android
+device_tracker.34ce008b8b60: {}
+device_tracker.android97367da2dcf80ca2:
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-woman_emoji-modifier-fitzpatrick-type-1-2_1f475-1f3fb_1f3fb.png
+  friendly_name: Зина
+device_tracker.android5b0bb71f36701beb:
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-man_emoji-modifier-fitzpatrick-type-1-2_1f474-1f3fb_1f3fb.png
+  friendly_name: Юра
+device_tracker.samsunggalaxys7: {}
+device_tracker.c49a02676acf: {}
+device_tracker.f894c2a110fd:
+  friendly_name: dell from Serena
+  icon: mdi:laptop-windows
+device_tracker.d8ce3a070f4a:
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-man_emoji-modifier-fitzpatrick-type-1-2_1f474-1f3fb_1f3fb.png
+  friendly_name: Юра
+light.gateway_light_34ce0088d30f:
+  friendly_name: Gateway Light
+sensor.temperature_158d00019cf466:
+  friendly_name: Температура (кухня)
+switch.broadlink_hall_enterance:
+  icon: mdi:lightbulb
+sensor.humidity_158d0001216f3b:
+  friendly_name: Влажность (коридор)
+sensor.temperature_158d0001216f3b:
+  friendly_name: Температура (коридор)
+sensor.humidity_158d00019cf466:
+  friendly_name: Влажность (кухня)
+sensor.temperature_158d0001df58de:
+  friendly_name: Температура (2 этаж)
+sensor.humidity_158d0001df58de:
+  friendly_name: Влажность (2 этаж)
+sensor.illumination_34ce0088d30f:
+  friendly_name: Освещенность (хаб)
+switch.broadlink_kitchen:
+  icon: mdi:lightbulb
+switch.broadlink_yard:
+  icon: mdi:lightbulb
+switch.broadlink_2floor:
+  icon: mdi:lightbulb
+light.yeelight_white_34ce008867ea:
+  friendly_name: Лампа
+light.yeelight_rgb_34ce00912999:
+  friendly_name: RGB Лампа
+sensor.illumination_158d0001e5e3a2:
+  friendly_name: Освещенность (кухня)
+binary_sensor.door_window_sensor_158d0001b145c6:
+  friendly_name: Входная дверь
+  icon: mdi:door
+light.yeelight_rgb_34ce008b8b60:
+  friendly_name: RGB лампа
+light.yeelight_rgb_34ce0084a799:
+  friendly_name: RGB настольная лампа
+timer.yard: {}
+timer.koridor: {}
+timer.kitchen: {}
+timer.hall: {}
+sensor.temperature_158d0002320300:
+  friendly_name: Температура (гараж)
+sensor.humidity_158d0002320300:
+  friendly_name: Влажность (гараж)
+sensor.pressure_158d0002320300:
+  friendly_name: Давление (гараж)
+binary_sensor.door_window_sensor_158d0002bf6139:
+  friendly_name: Ворота (гараж)
+  icon: mdi:door
+binary_sensor.motion_sensor_158d0002583a26:
+  friendly_name: Движение (гараж)
+  icon: mdi:run
+sensor.illumination_158d0002583a26:
+  friendly_name: Освещенность (гараж)
+switch.sc1_hall:
+  icon: mdi:lightbulb
+switch.sc1_2floor:
+  icon: mdi:lightbulb
+switch.sc1_kitchen:
+  icon: mdi:lightbulb
+switch.sc1_yard:
+  icon: mdi:lightbulb
+device_tracker.80_ce_b9_ce_d9_b9:
+  icon: mdi:cellphone-android
+person.andrei:
+  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/146/bearded-person_emoji-modifier-fitzpatrick-type-1-2_1f9d4-1f3fb_1f3fb.png'
+person.natasha:
+  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/woman_emoji-modifier-fitzpatrick-type-1-2_1f469-1f3fb_1f3fb.png'
+person.polina:
+  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/girl_emoji-modifier-fitzpatrick-type-1-2_1f467-1f3fb_1f3fb.png'
+person.baba:
+  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-woman_emoji-modifier-fitzpatrick-type-1-2_1f475-1f3fb_1f3fb.png'
+  friendly_name: 'Зина'
+person.ded:
+  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-man_emoji-modifier-fitzpatrick-type-1-2_1f474-1f3fb_1f3fb.png'
+  friendly_name: 'Юра'

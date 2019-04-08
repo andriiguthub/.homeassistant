@@ -1,0 +1,18 @@
+# use this file to switch camera settings
+- id: switch_camera_mode_day
+  alias: switch_camera_mode_day
+  hide_entity: True
+  trigger:
+    - platform: sun
+      event: sunrise
+  action:
+    - service: shell_command.camera_day
+#
+- id: switch_camera_mode_night
+  alias: switch_camera_mode_night
+  hide_entity: True
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: shell_command.camera_night

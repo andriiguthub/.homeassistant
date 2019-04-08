@@ -1,0 +1,16 @@
+  - platform: kodi
+    host: '10.0.1.6'
+    name: 'kodi_pc'
+    turn_on_action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: 'bc:5f:f4:e6:a3:4f'
+          broadcast_address: '10.0.255.255'
+  - platform: kodi
+    host: '10.0.1.66'
+    name: 'kodi_zina'
+    turn_on_action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: 'B8:27:EB:5E:BA:93'
+          broadcast_address: '10.0.255.255'

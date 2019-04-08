@@ -1,0 +1,17 @@
+    devices:
+      10.0.1.178:
+        name: 'Лампа'
+        save_on_change: 'true'
+        model: 'mono1'
+      10.0.1.183:
+        name: 'RGB Лампа'
+        save_on_change: 'true'
+        model: 'color1'
+      10.0.1.201:
+        name: 'RGB настольная лампа'
+        save_on_change: 'true'
+        model: 'color1'
+      10.0.1.203:
+        name: 'RGB Лампа'
+        save_on_change: 'true'
+        model: 'color1'

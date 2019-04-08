@@ -1,0 +1,54 @@
+# use this files for notifications
+# Двери долго открыты
+- id: say_close_the_door
+  alias: say_close_the_door
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+      to: 'on'
+      for:
+        minutes: 5
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.door_alert
+  action:
+    - service: tts.google_say
+      data:
+        message: '. Закройте входные двери!'
+    - service: persistent_notification.create
+      data:
+        message: "Входная дверь не закрыта!"
+        title: "Инфо"
+        notification_id: open_doors
+    - service: light.turn_on
+      data_template:
+        entity_id: 
+          - light.rgb_lampa
+          - light.rgb_lampa_2
+        brightness: 255
+        effect: 'Alarm'
+- id: open_door
+  alias: open_door
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+      to: 'on'
+  action:
+    - service: timer.start
+      entity_id: timer.door_alert
+- id: no_internet
+  alias: no_internet
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ping_binary_sensor
+      to: 'off'
+  action:
+    - service: persistent_notification.create
+      data:
+        message: "Нет выхода в интернет!"
+        title: "Интернет"
+        notification_id: no_internet

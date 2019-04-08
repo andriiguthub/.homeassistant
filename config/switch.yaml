@@ -1,0 +1,20 @@
+  - platform: broadlink
+    host: 10.0.1.204
+    mac: '34EA34BDE356'
+    friendly_name: 'sc1_2floor'
+    type: 'sp2'
+  - platform: broadlink
+    host: 10.0.1.114
+    mac: '34ea34bdd192'
+    friendly_name: 'sc1_kitchen'
+    type: 'sp2'
+  - platform: broadlink
+    host: 10.0.1.175
+    mac: '34EA34BDD06B'
+    friendly_name: 'sc1_yard'
+    type: 'sp2'
+  - platform: broadlink
+    host: 10.0.1.225
+    mac: '34ea34bdcdc2'
+    friendly_name: 'sc1_hall'
+    type: 'sp2'

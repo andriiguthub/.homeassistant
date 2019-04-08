@@ -1,0 +1,42 @@
+- id: disco_mode_on
+  alias: disco_mode_on
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.disco
+      to: 'on'
+  action:
+    - service: automation.turn_off
+      entity_id:
+        - automation.on_hall_light
+        - automation.on_kitchen_light
+    - service: light.turn_on
+      data_template:
+        entity_id:
+          - light.rgb_lampa
+          - light.rgb_lampa_2
+        brightness: '255'
+        effect: 'Disco'
+- id: disco_mode_off
+  alias: disco_mode_off
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.disco
+      to: 'off'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id:
+          - light.rgb_lampa
+          - light.rgb_lampa_2
+        brightness: '250'
+        color_temp: '229'
+    - service: automation.turn_on
+      entity_id:
+        - automation.on_hall_light
+        - automation.on_kitchen_light
+    - service: light.turn_off
+      entity_id:
+        - light.rgb_lampa
+        - light.rgb_lampa_2

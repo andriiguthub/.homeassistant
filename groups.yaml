@@ -1,0 +1,223 @@
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - group.yard
+      - group.hall
+      - group.koridor
+      - group.2nd_floor
+      - group.room_lebedev
+      - group.room_polina
+      - group.night_mode
+
+  yard:
+    name: Двор
+    control: hidden
+    entities:
+      - switch.broadlink_yard
+      - timer.yard
+      - timer.yard_coming_home
+      - input_boolean.auto_light_yard
+
+  hall:
+    name: Зал и Кухня
+    control: hidden
+    entities:
+      - sensor.illumination_158d0001e5e3a2
+      - switch.broadlink_hall_enterance
+      - switch.broadlink_kitchen
+      - binary_sensor.motion_sensor_158d0001e5e3a2
+      - timer.kitchen
+      - light.yeelight_rgb_34ce008b8b60
+      - light.yeelight_rgb_34ce00912999
+      - binary_sensor.motion_sensor_158d000128b319
+      - timer.hall
+      - input_boolean.auto_light_hall
+
+  koridor:
+    name: Коридор
+    control: hidden
+    icon: mdi:fridge
+    entities:
+      - sensor.illumination_34ce0088d30f
+      - light.yeelight_white_34ce008867ea
+      - timer.koridor
+      - input_boolean.auto_light_koridor
+
+  2nd_floor:
+    name: 2 этаж
+    control: hidden
+    entities:
+      - switch.broadlink_2floor
+      - timer.2floor
+      - input_boolean.auto_light_2floor
+
+  room_polina:
+    name: Полина комната
+    #control: true
+    entities:
+      - light.yeelight_rgb_34ce0084a799
+      - timer.room_polina
+
+  hidden_items:
+    name: Hidden
+    entities:
+      - light.gateway_light_34ce0088d30f
+
+  room_lebedev:
+    name: Спальня
+    control: hidden
+    entities:
+      # - light.yeelight_rgb_34ce00912999
+
+  night_mode:
+    name: Night mode
+    control: hidden
+    entities:
+      - input_boolean.night_mode
+      - timer.1h
+
+  people:
+    name: Кто дома
+    entities:
+      - device_tracker.samsunggalaxys7
+      - device_tracker.androide080cfbd841dcb82
+      - device_tracker.c49a02676acf
+      - device_tracker.android97367da2dcf80ca2
+      - device_tracker.android5b0bb71f36701beb
+      - device_tracker.d8ce3a070f4a
+      - device_tracker.80_ce_b9_ce_d9_b9
+      - device_tracker.f894c2a110fd
+      - device_tracker.polina_lg
+      - person.baba
+      - person.ded
+      - person.polina
+      - person.andrei
+      - person.natasha
+
+  security:
+    name: Охрана
+    view: yes
+    icon: mdi:security
+    entities:
+      - group.people
+      - group.security_yard
+      - input_boolean.alarm
+      - input_boolean.home_alone
+      - group.security_koridor
+      - group.security_kitchen
+      - group.security_2nd_floor
+      - group.security_garage
+
+  security_yard:
+    name: Двор
+    control: hidden
+    entities:
+      - camera.yard_camera
+
+  security_kitchen:
+    name: Кухня и зал
+    control: hidden
+    entities:
+      - binary_sensor.motion_sensor_158d0001e5e3a2
+      - binary_sensor.motion_sensor_158d000128b319
+      - camera.floor1_hall_camera
+
+  security_koridor:
+    name: Коридор
+    control: hidden
+    entities:
+      - binary_sensor.door_window_sensor_158d0001b145c6
+      - timer.door_alert
+      - binary_sensor.motion_sensor_158d0001d91dc9
+
+  security_garage:
+    name: Гараж
+    control: hidden
+    entities:
+      - binary_sensor.door_window_sensor_158d0002bf6139
+      - binary_sensor.motion_sensor_158d0002583a26
+
+  security_2nd_floor:
+    name: 2 этаж
+    control: hidden
+    entities:
+      - binary_sensor.motion_sensor_158d0001d91d58
+
+  environment:
+    name: Окружающая среда
+    view: yes
+    icon: mdi:temperature-celsius
+    entities:
+      - group.environment_weather
+      - group.environment_koridor
+      - group.environment_kitchen
+      - group.environment_2nd_floor
+      - group.environment_garage
+
+  environment_kitchen:
+    name: Кухня и зал
+    control: hidden
+    entities:
+      - sensor.temperature_158d00019cf466
+      - sensor.humidity_158d00019cf466
+
+  environment_koridor:
+    name: Коридор
+    control: hidden
+    entities:
+      - sensor.temperature_158d0001216f3b
+      - sensor.humidity_158d0001216f3b
+
+  environment_2nd_floor:
+    name: 2 этаж
+    control: hidden
+    entities:
+      - sensor.temperature_158d0001df58de
+      - sensor.humidity_158d0001df58de
+
+  environment_weather:
+    name: Погода
+    control: hidden
+    entities:
+      - sensor.weather_temperature
+      - sensor.weather_humidity
+
+  environment_garage:
+    name: Гараж
+    control: hidden
+    entities:
+      - sensor.temperature_158d0002320300
+      - sensor.humidity_158d0002320300
+      - sensor.pressure_158d0002320300
+
+  multimedia:
+    name: Развлечения
+    view: yes
+    icon: mdi:kodi
+    entities:
+      - group.multimedia_2nd_floor
+      - input_boolean.disco
+
+  multimedia_2nd_floor:
+    name: 2 этаж
+    control: hidden
+    entities:
+      - media_player.kodi_pc
+      - media_player.kodi_zina
+
+  monitoring:
+    name: Monitoring
+    view: yes
+    icon: mdi:atom
+    entities:
+      - group.monitoring_nas
+
+  monitoring_nas:
+    name: nas
+    control: hidden
+    entities:
+      - sensor.has_hdd_devsdb
+      - sensor.has_hdd_devsdc
+      - sensor.has_hdd_devsdd
+      - sensor.has_hdd_devsde

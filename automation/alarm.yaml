@@ -1,0 +1,139 @@
+# use this files for alarm
+# turn_on_alarm
+- id: on_alarm
+  alias: on_alarm
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: input_boolean.alarm
+      to: 'on'
+    - platform: state
+      entity_id: group.people
+      to: 'not_home'
+      for:
+        minutes: 5
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.alarm
+    - service: notify.dom
+      data:
+        message: 'Дом поставлен на охрану'
+    - service: automation.turn_off
+      entity_id:
+        - automation.on_koridor_light
+        - automation.on_hall_light
+        - automation.on_kitchen_light
+        - automation.on_yard_light
+        - automation.on_2floor_light
+# alarm off
+- id: off_alarm
+  alias: off_alarm
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: group.people
+      to: 'home'
+    - platform: state
+      entity_id: input_boolean.alarm
+      to: 'off'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.alarm
+    - service: notify.dom
+      data:
+        title: 'Инфо'
+        message: 'Дом снят с охраны'
+        data:
+          tag: alert
+          url: 'https://home.alebedev.photo/lovelace/security'
+          image: !secret yard_camera_img
+          renotify: 0
+    - service: light.turn_on
+      data_template:
+        entity_id:
+          - light.rgb_lampa
+          - light.rgb_lampa_2
+          - light.rgb_nastolnaia_lampa
+        brightness: '250'
+        color_temp: '229'
+    - service: automation.turn_on
+      entity_id:
+        - automation.on_hall_light
+        - automation.on_kitchen_light
+    - service: light.turn_off
+      entity_id:
+        - light.rgb_lampa
+        - light.rgb_lampa_2
+        - light.rgb_nastolnaia_lampa
+    - service: xiaomi_aqara.stop_ringtone
+      data:
+        gw_mac: !secret gateway_mac
+    - service: automation.turn_on
+      entity_id:
+        - automation.on_koridor_light
+        - automation.on_hall_light
+        - automation.on_kitchen_light
+        - automation.on_vhod_light
+        - automation.on_2floor_light
+# Движение
+- id: alarm
+  alias: "alarm"
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0001d91dc9
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0001d91d58
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d000128b319
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0001e5e3a2
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0002bf6139
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0002583a26
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.alarm
+        state: 'on'
+  action:
+    - service: notify.dom
+      data:
+        title: 'Вторжение!'
+        message: 'Обнаружено движение!'
+        data:
+          tag: alert
+          url: 'https://home.alebedev.photo/lovelace/security'
+          image: !secret yard_camera_img
+          renotify: '0'
+    - service: persistent_notification.create
+      data:
+        message: "Обнаружено движение!"
+        title: "Охрана"
+        notification_id: alarm_danger
+    - service: light.turn_on
+      data_template:
+        entity_id: 
+          - light.rgb_lampa
+          - light.rgb_lampa_2
+          - light.rgb_nastolnaia_lampa
+        brightness: '255'
+        effect: 'Police'
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: !secret gateway_mac
+        ringtone_id: '1'
+        ringtone_vol: '255'

@@ -1,0 +1,2 @@
+  camera_day: !secret camera_day
+  camera_night: !secret camera_night

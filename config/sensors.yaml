@@ -1,0 +1,86 @@
+  - platform: yr
+    name: Weather
+    monitored_conditions:
+    - temperature
+    - humidity
+  - platform: template
+    sensors:
+      invalid_config:
+        value_template: "{% if is_state_attr('persistent_notification.invalid_config', 'title', 'Invalid config') %}true{% else %}false{% endif %}"
+        friendly_name: 'Invalid Config'
+  - platform: hddtemp
+    name: 'has_hdd'
+    host: '10.0.1.7'
+    port: '7634'
+    disks:
+      - /dev/sdb
+      - /dev/sdc
+      - /dev/sdd
+      - /dev/sde
+  - platform: cert_expiry
+    host: 'home.alebedev.photo'
+# to office
+  - platform: waze_travel_time
+    name: 'Flat-Office'
+    origin: zone.3V
+    destination: zone.office
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'School-Office'
+    origin: zone.school
+    destination: zone.office
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'Home-Office'
+    origin: zone.Home
+    destination: zone.office
+    region: 'EU'
+# to home
+  - platform: waze_travel_time
+    name: 'Flat-Home'
+    origin: zone.3V
+    destination: zone.Home
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'School-Home'
+    origin: zone.school
+    destination: zone.Home
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'Office-Home'
+    origin: zone.office
+    destination: zone.Home
+    region: 'EU'
+# to school
+  - platform: waze_travel_time
+    name: 'Flat-School'
+    origin: zone.3V
+    destination: zone.school
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'Home-School'
+    origin: zone.Home
+    destination: zone.school
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'Office-School'
+    origin: zone.office
+    destination: zone.school
+    region: 'EU'
+
+# to flat
+  - platform: waze_travel_time
+    name: 'Home-Flat'
+    origin: zone.Home
+    destination: zone.3V
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'Office-Flat'
+    origin: zone.office
+    destination: zone.3V
+    region: 'EU'
+  - platform: waze_travel_time
+    name: 'School-Flat'
+    origin: zone.school
+    destination: zone.3V
+    region: 'EU'
