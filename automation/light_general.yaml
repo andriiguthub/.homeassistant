@@ -16,6 +16,27 @@
       entity_id:
         - light.rgb_lampa
         - light.rgb_lampa_2
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: 'open_doors'
+# Гараж закрыли отключаем алерт
+- id: OFF_hall_light_door_alert
+  alias: OFF_hall_light_door_alert
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0002bf6139
+      to: 'off'
+  action:
+    - service: timer.cancel
+      entity_id: timer.door_alert
+    - service: light.turn_off
+      entity_id:
+        - light.rgb_lampa
+        - light.rgb_lampa_2
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: 'open_garage'
 # Выкл весь свет
 - id: OFF_all_light
   alias: OFF_all_light
@@ -40,7 +61,7 @@
         - light.rgb_lampa
         - light.rgb_lampa
         - light.rgb_nastolnaia_lampa
-    - service: notify.notify
+    - service: notify.dom
       data:
         message: 'Свет выключен'
 #
@@ -59,7 +80,7 @@
         entity_id: input_boolean.home_alone
         state: 'on'
   action:
-    - service: notify.notify
+    - service: notify.dom
       data:
         message: 'Одинокий свет включен'
     - delay:

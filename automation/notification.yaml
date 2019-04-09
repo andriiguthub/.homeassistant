@@ -29,6 +29,37 @@
           - light.rgb_lampa_2
         brightness: 255
         effect: 'Alarm'
+# Ворота долго открыты
+- id: say_close_the_garage
+  alias: say_close_the_garage
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0002bf6139
+      to: 'on'
+      for:
+        minutes: 5
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.door_alert
+  action:
+    - service: tts.google_say
+      data:
+        message: '. Закройте гараж!'
+    - service: persistent_notification.create
+      data:
+        message: "Гараж не закрыт!"
+        title: "Инфо"
+        notification_id: open_garage
+    - service: light.turn_on
+      data_template:
+        entity_id: 
+          - light.rgb_lampa
+          - light.rgb_lampa_2
+        brightness: 255
+        effect: 'Alarm'
+#
 - id: open_door
   alias: open_door
   hide_entity: True
@@ -39,6 +70,7 @@
   action:
     - service: timer.start
       entity_id: timer.door_alert
+
 - id: no_internet
   alias: no_internet
   hide_entity: True

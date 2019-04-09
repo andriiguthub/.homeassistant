@@ -16,7 +16,7 @@
     #   entity_id: binary_sensor.motion_sensor_158d0002583a26
     #   to: 'on'
     # - platform: state
-    #   entity_id: device_tracker.samsunggalaxys7
+    #   entity_id: person.andrei
     #   to: 'home'
     # - platform: state
     #   entity_id: device_tracker.androide080cfbd841dcb82
