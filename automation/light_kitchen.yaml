@@ -1,10 +1,10 @@
-### 2 floor
-- id: on_2floor_light
-  alias: on_2floor_light
+# Свет на кухне ####################
+- id: on_kitchen_light
+  alias: on_kitchen_light
   hide_entity: True
   trigger:
     - platform: state
-      entity_id: binary_sensor.motion_sensor_158d0001d91d58
+      entity_id: binary_sensor.motion_sensor_158d0001e5e3a2
       to: 'on'
   condition:
     condition: and
@@ -13,33 +13,32 @@
         entity_id: sensor.illumination_158d0001e5e3a2
         below: !secret light_limit
       - condition: state
-        entity_id: input_boolean.auto_light_2floor
+        entity_id: input_boolean.auto_light_hall
         state: 'on'
   action:
     - service: timer.cancel
-      entity_id: timer.2floor
-    - service: shell_command.2floor_motion_off
+      entity_id: timer.kitchen
     - service: timer.start
-      entity_id: timer.2floor
+      entity_id: timer.kitchen
     - service: switch.turn_on
       entity_id:
-        - switch.sc1_2floor
+        - switch.sc1_kitchen
+        - switch.sc1_hall
 #
-- id: off_2floor_light
-  alias: off_2floor_light
+- id: OFF_kitchen_light
+  alias: OFF_kitchen_light
   hide_entity: True
   trigger:
     - platform: event
       event_type: timer.finished
       event_data: 
-        entity_id: timer.2floor
+        entity_id: timer.kitchen
   condition:
-    - condition: numeric_state
-      entity_id: sensor.illumination_158d0001e5e3a2
-      below: !secret light_limit
     - condition: state
-      entity_id: input_boolean.auto_light_2floor
+      entity_id: input_boolean.auto_light_hall
       state: 'on'
   action:
     - service: switch.turn_off
-      entity_id: switch.sc1_2floor
+      entity_id: switch.sc1_kitchen
+    - service: switch.turn_off
+      entity_id: switch.sc1_hall

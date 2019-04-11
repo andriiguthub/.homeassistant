@@ -1,37 +1,4 @@
 # Свет в коридоре ####################
-#
-- id: on_koridor_light_auto
-  alias: on_koridor_light_auto
-  hide_entity: True
-  trigger:
-    - platform: state
-      entity_id: input_boolean.auto_light_koridor
-      to: 'on'
-  action:
-    # - service: input_boolean.turn_on
-      # data:
-        # entity_id: input_boolean.auto_light_koridor
-    - service: automation.turn_on
-      entity_id:
-        - automation.on_koridor_light
-        - automation.off_koridor_light
-
-- id: off_koridor_light_auto
-  alias: off_koridor_light_auto
-  hide_entity: True
-  trigger:
-    - platform: state
-      entity_id: input_boolean.auto_light_koridor
-      to: 'off'
-  action:
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.auto_light_koridor
-    - service: automation.turn_off
-      entity_id:
-        - automation.on_koridor_light
-        - automation.off_koridor_light
-
 - id: on_koridor_light
   alias: on_koridor_light
   hide_entity: True
@@ -43,23 +10,10 @@
       entity_id: binary_sensor.door_window_sensor_158d0001b145c6
       to: 'off'
       from: 'on'
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d0001b145c6
-      to: 'on'
-      from: 'off'
-  # condition:
-  #   condition: or
-  #   conditions:
-  #     - condition: numeric_state
-  #       entity_id: sensor.illumination_158d0001e5e3a2
-  #       below: !secret light_limit
-  #     - condition: sun
-  #       after: sunset
-  #     - condition: sun
-  #       before: sunrise
-  #     - condition: state
-  #       entity_id: light.lampa
-  #       state: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_light_koridor
+      state: 'on'
   action:
     - service: light.turn_on
       data_template:
@@ -67,12 +21,8 @@
           - light.lampa
           - light.gateway_light_34ce0088d30f
         brightness: '100'
-#    - service: automation.trigger
-#      entity_id:
-#        - automation.on_2floor_light
     - service: timer.cancel
       entity_id: timer.koridor
-#    - service: shell_command.koridor_motion_off
     - service: timer.start
       entity_id: timer.koridor
 #
@@ -84,16 +34,12 @@
       event_type: timer.finished
       event_data: 
         entity_id: timer.koridor
-#    - platform: state
-#      entity_id: binary_sensor.motion_sensor_158d0001d91dc9
-#      to: 'off'
-#      for:
-#        minutes: 1
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_light_koridor
+      state: 'on'
   action:
     - service: light.turn_off
       entity_id:
         - light.lampa
         - light.gateway_light_34ce0088d30f
-    # - service: automation.trigger
-    #   entity_id:
-    #     - automation.off_2floor_light
