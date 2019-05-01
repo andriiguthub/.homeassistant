@@ -1,6 +1,6 @@
 # Свет на кухне ####################
-- id: kitchen_light_on
-  alias: kitchen_light_on
+- id: kitchen-light-on
+  alias: kitchen-light-on
   hide_entity: True
   trigger:
     - platform: state
@@ -25,8 +25,8 @@
         - switch.sc1_kitchen
         - switch.sc1_hall
 #
-- id: kitchen_light_off
-  alias: kitchen_light_off
+- id: kitchen-light-off
+  alias: kitchen-light-off
   hide_entity: True
   trigger:
     - platform: event
@@ -44,12 +44,12 @@
         state: 'off'
   action:
     - service: switch.turn_off
-      entity_id: switch.sc1_kitchen
-    - service: switch.turn_off
-      entity_id: switch.sc1_hall
+      entity_id: 
+        - switch.sc1_kitchen
+        - switch.sc1_hall
 #
-- id: kitchen_light_delay
-  alias: kitchen_light_delay
+- id: kitchen-light-delay
+  alias: kitchen-light-delay
   hide_entity: True
   trigger:
     - platform: event

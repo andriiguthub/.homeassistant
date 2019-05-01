@@ -1,5 +1,5 @@
-- id: ON_hall_light
-  alias: ON_hall_light
+﻿- id: hall-light-on
+  alias: hall-light-on
   hide_entity: True
   trigger:
     - platform: state
@@ -22,13 +22,13 @@
     - service: light.turn_on
       data_template:
         entity_id:
-          - light.rgb_lampa
-          - light.rgb_lampa_2
+          - light.rgb_lamp
+          - light.rgb_lamp_2
         brightness: '5'
         color_temp: '229'
 # Выкл свет в зале
-- id: OFF_hall_light
-  alias: OFF_hall_light
+- id: hall-light-off
+  alias: hall-light-off
   hide_entity: True
   trigger:
     - platform: event
@@ -39,9 +39,32 @@
     - condition: state
       entity_id: input_boolean.auto_light_hall
       state: 'on'
+    - condition: state
+      entity_id: binary_sensor.motion_sensor_158d000128b319
+      state: 'off'
   action:
     - service: light.turn_off
       entity_id:
-        - light.rgb_lampa
-        - light.rgb_lampa_2
+        - light.rgb_lamp
+        - light.rgb_lamp_2
 #
+- id: hall-light-delay
+  alias: hall-light-delay
+  hide_entity: True
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.hall
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.auto_light_hall
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.motion_sensor_158d000128b319
+        state: 'on'
+  action:
+    - service: timer.start
+      entity_id: timer.hall

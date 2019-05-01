@@ -55,19 +55,11 @@ switch.broadlink_yard:
   icon: mdi:lightbulb
 switch.broadlink_2floor:
   icon: mdi:lightbulb
-light.yeelight_white_34ce008867ea:
-  friendly_name: Лампа
-light.yeelight_rgb_34ce00912999:
-  friendly_name: RGB Лампа
 sensor.illumination_158d0001e5e3a2:
   friendly_name: Освещенность (кухня)
 binary_sensor.door_window_sensor_158d0001b145c6:
   friendly_name: Входная дверь
   icon: mdi:door
-light.yeelight_rgb_34ce008b8b60:
-  friendly_name: RGB лампа
-light.yeelight_rgb_34ce0084a799:
-  friendly_name: RGB настольная лампа
 timer.yard: {}
 timer.koridor: {}
 timer.kitchen: {}
@@ -87,24 +79,39 @@ binary_sensor.motion_sensor_158d0002583a26:
 sensor.illumination_158d0002583a26:
   friendly_name: Освещенность (гараж)
 switch.sc1_hall:
-  icon: mdi:lightbulb
+  icon: mdi:led-strip
 switch.sc1_2floor:
   icon: mdi:lightbulb
 switch.sc1_kitchen:
-  icon: mdi:lightbulb
+  icon: mdi:led-strip
 switch.sc1_yard:
-  icon: mdi:lightbulb
+  friendly_name: Фонарь
+  icon: mdi:lighthouse-on
 device_tracker.80_ce_b9_ce_d9_b9:
   icon: mdi:cellphone-android
 person.andrei:
-  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/146/bearded-person_emoji-modifier-fitzpatrick-type-1-2_1f9d4-1f3fb_1f3fb.png'
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/146/bearded-person_emoji-modifier-fitzpatrick-type-1-2_1f9d4-1f3fb_1f3fb.png
 person.natasha:
-  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/woman_emoji-modifier-fitzpatrick-type-1-2_1f469-1f3fb_1f3fb.png'
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/woman_emoji-modifier-fitzpatrick-type-1-2_1f469-1f3fb_1f3fb.png
 person.polina:
-  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/girl_emoji-modifier-fitzpatrick-type-1-2_1f467-1f3fb_1f3fb.png'
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/girl_emoji-modifier-fitzpatrick-type-1-2_1f467-1f3fb_1f3fb.png
 person.baba:
-  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-woman_emoji-modifier-fitzpatrick-type-1-2_1f475-1f3fb_1f3fb.png'
-  friendly_name: 'Зина'
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-woman_emoji-modifier-fitzpatrick-type-1-2_1f475-1f3fb_1f3fb.png
+  friendly_name: Зина
 person.ded:
-  entity_picture: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-man_emoji-modifier-fitzpatrick-type-1-2_1f474-1f3fb_1f3fb.png'
-  friendly_name: 'Юра'
+  entity_picture: https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/146/older-man_emoji-modifier-fitzpatrick-type-1-2_1f474-1f3fb_1f3fb.png
+  friendly_name: Юра
+binary_sensor.ping_binary_sensor:
+  friendly_name: Internet
+binary_sensor.hap_ac2:
+  icon: mdi:router-wireless
+binary_sensor.wap_ac:
+  icon: mdi:router-wireless
+binary_sensor.internet:
+  icon: mdi:web
+binary_sensor.nas:
+  icon: mdi:nas
+binary_sensor.xiaomi_gateway:
+  icon: mdi:alpha-x-circle
+binary_sensor.home10:
+  icon: mdi:desktop-classic

@@ -1,4 +1,5 @@
 # use this files for notifications
+
 # Двери долго открыты
 - id: say_close_the_door
   alias: say_close_the_door
@@ -29,6 +30,7 @@
           - light.rgb_lampa_2
         brightness: 255
         effect: 'Alarm'
+
 # Ворота долго открыты
 - id: say_close_the_garage
   alias: say_close_the_garage
@@ -70,7 +72,7 @@
   action:
     - service: timer.start
       entity_id: timer.door_alert
-
+#
 - id: no_internet
   alias: no_internet
   hide_entity: True
@@ -84,3 +86,28 @@
         message: "Нет выхода в интернет!"
         title: "Интернет"
         notification_id: no_internet
+# Двери долго открыты отмена
+- id: door_notification_dismiss
+  alias: door_notification_dismiss
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+      to: 'off'
+  action:
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: open_doors
+# Ворота долго открыты отмена
+- id: garage_notification_dismiss
+  alias: garage_notification_dismiss
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0002bf6139
+      to: 'off'
+  action:
+    - service: persistent_notification.dissmiss
+      data:
+        notification_id: open_garage
+#

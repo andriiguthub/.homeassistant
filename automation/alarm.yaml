@@ -53,8 +53,8 @@
     - service: light.turn_on
       data_template:
         entity_id:
-          - light.rgb_lampa
-          - light.rgb_lampa_2
+          - light.rgb_lamp
+          - light.rgb_lamp_2
           - light.rgb_nastolnaia_lampa
         brightness: '250'
         color_temp: '229'
@@ -64,8 +64,8 @@
         - automation.on_kitchen_light
     - service: light.turn_off
       entity_id:
-        - light.rgb_lampa
-        - light.rgb_lampa_2
+        - light.rgb_lamp
+        - light.rgb_lamp_2
         - light.rgb_nastolnaia_lampa
     - service: xiaomi_aqara.stop_ringtone
       data:
@@ -127,8 +127,8 @@
     - service: light.turn_on
       data_template:
         entity_id: 
-          - light.rgb_lampa
-          - light.rgb_lampa_2
+          - light.rgb_lamp
+          - light.rgb_lamp_2
           - light.rgb_nastolnaia_lampa
         brightness: '255'
         effect: 'Police'

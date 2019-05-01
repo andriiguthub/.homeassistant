@@ -1,6 +1,6 @@
-# Свет в коридоре ####################
-- id: on_koridor_light
-  alias: on_koridor_light
+﻿# Свет в коридоре ####################
+- id: koridor-light-on
+  alias: koridor-light-on
   hide_entity: True
   trigger:
     - platform: state
@@ -18,7 +18,7 @@
     - service: light.turn_on
       data_template:
         entity_id: 
-          - light.lampa
+          - light.lamp
           - light.gateway_light_34ce0088d30f
         brightness: '100'
     - service: timer.cancel
@@ -26,8 +26,8 @@
     - service: timer.start
       entity_id: timer.koridor
 #
-- id: off_koridor_light
-  alias: off_koridor_light
+- id: koridor-light-off
+  alias: koridor-light-off
   hide_entity: True
   trigger:
     - platform: event
@@ -35,11 +35,37 @@
       event_data: 
         entity_id: timer.koridor
   condition:
-    - condition: state
-      entity_id: input_boolean.auto_light_koridor
-      state: 'on'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.auto_light_koridor
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.motion_sensor_158d0001d91dc9
+        state: 'off'
   action:
     - service: light.turn_off
       entity_id:
-        - light.lampa
+        - light.lamp
         - light.gateway_light_34ce0088d30f
+#
+- id: koridor-light-delay
+  alias: koridor-light-delay
+  hide_entity: True
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.koridor
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.auto_light_koridor
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.motion_sensor_158d0001d91dc9
+        state: 'on'
+  action:
+    - service: timer.start
+      entity_id: timer.koridor

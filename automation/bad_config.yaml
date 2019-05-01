@@ -4,13 +4,8 @@
   hide_entity: True
   trigger:
     - platform: state
-      entity_id: sensor.invalid_config
-      to: 'true'
-      for:
-        seconds: 60
+      entity_id: binary_sensor.xiaomi_gateway
+      from: 'off'
+      to: 'on'
   action:
-    - service: homeassistant.restart
-    - service: homeassistant.restart
-    - service: homeassistant.restart
-    - service: homeassistant.restart
     - service: homeassistant.restart

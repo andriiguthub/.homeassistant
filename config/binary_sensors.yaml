@@ -2,14 +2,17 @@
     host: home.alebedev.photo
     name: internet
   - platform: ping
+    host: 10.0.1.70
+    name: home10
+  - platform: ping
     host: 10.0.1.2
     name: hap_ac2
-    count: 64
   - platform: ping
     host: 10.0.1.3
     name: wap_ac
-    count: 64
   - platform: ping
     host: 10.0.1.7
     name: NAS
-    count: 64
+  - platform: ping
+    host: 10.0.1.109
+    name: xiaomi-gateway

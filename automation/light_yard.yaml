@@ -1,7 +1,6 @@
 # Cвет над входом ###################
-#
-- id: on_yard_light
-  alias: on_yard_light
+- id: yard-light-on
+  alias: yard-light-on
   hide_entity: True
   trigger:
     - platform: state
@@ -28,10 +27,9 @@
       entity_id: timer.yard  
     - service: timer.start
       entity_id: timer.yard
-
 #
-- id: off_yard_light
-  alias: off_yard_light
+- id: yard-light-off
+  alias: yard-light-off
   hide_entity: True
   trigger:
     - platform: state
@@ -46,9 +44,42 @@
       event_data: 
         entity_id: timer.yard_coming_home
   condition:
-    - condition: state
-      entity_id: input_boolean.auto_light_yard
-      state: 'on'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.auto_light_yard
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+        state: 'off'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.sc1_yard
+#
+- id: yard-light-delay
+  alias: yard-light-delay
+  hide_entity: True
+  trigger:
+    - platform: state
+      entity_id: group.people
+      to: 'not_home'
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.yard
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.yard_coming_home
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.auto_light_yard
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.door_window_sensor_158d0001b145c6
+        state: 'on'
   action:
     - service: switch.turn_off
       entity_id: switch.sc1_yard
