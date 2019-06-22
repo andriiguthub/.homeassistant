@@ -1,0 +1,58 @@
+# use this file for air conditioner
+- id: hall_ac_heater_on
+  alias: hall_ac_heater_on
+  hide_entity: True
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temperature_158d00019cf466
+      above: 20
+  action:
+    - service: climate.turn_on
+      data:
+        entity_id: climate.ac_hall
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.ac_hall
+        operation_mode: 'heat'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.ac_hall
+        temperature: 22
+        operation_mode: 'heat'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.ac_hall
+        fan_mode: 'Quiet'
+    - service: climate.set_swing_mode
+      data:
+        entity_id: climate.ac_hall
+        swing_mode: 'Fixed in the upmost position'
+#
+- id: hall_ac_conditioner_on
+  alias: hall_ac_conditioner_on
+  hide_entity: True
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temperature_158d00019cf466
+      below: 27
+  action:
+    - service: climate.turn_on
+      data:
+        entity_id: climate.ac_hall
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.ac_hall
+        operation_mode: 'auto'
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.ac_hall
+        temperature: 25
+        operation_mode: 'auto'
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.ac_hall
+        fan_mode: 'Quiet'
+    - service: climate.set_swing_mode
+      data:
+        entity_id: climate.ac_hall
+        swing_mode: 'Fixed in the upmost position'
