@@ -1,6 +1,0 @@
-  - platform: ffmpeg
-    input: !secret yard_camera_url
-    name: 'yard_camera'
-  - platform: ffmpeg
-    input: !secret floor1_hall_camera_url
-    name: 'floor1_hall_camera'
