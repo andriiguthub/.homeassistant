@@ -5,11 +5,15 @@ once install is complete, reboot machine and confirm that you can ssh with your 
 install docker engine (https://docs.docker.com/engine/install/ubuntu/)
 configure docker to run from non-root user (https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
 install homeassistant, configuration will be store localy in /apps/homeassistant/config folder
-  sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
-  docker run -d --name homeassistant --privileged --restart=unless-stopped  -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host --device /dev/ttyUSB0:/dev/ttyUSB0 ghcr.io/home-assistant/home-assistant:stable
+	sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
+	docker run -d --name homeassistant --privileged --restart=unless-stopped  -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host --device /dev/ttyUSB0:/dev/ttyUSB0 ghcr.io/home-assistant/home-assistant:stable
 homeassistant is available on port 8123 on your ubuntu server
 
 my configuration steps
+	## configure homeassistant to use postgres
+	docker stop homeassistant; docker rm homeassistant
+	echo "recorder:" >> /apps/homeassistant/config/configuration.yaml
+	echo "  db_url: postgresql://dbuser:mysecretpassword@10.0.0.15/homeassistant-db" >> /apps/homeassistant/config/configuration.yaml
 ## install postgress, data will be store localy in /apps/postgresql/data folder
 	sudo mkdir -p /apps/postgresql/data; sudo chown -R $USER /apps/postgresql/data; sudo chmod -R 0755 /apps/postgresql/data
 	docker run -d --name homeassistant-db -p 5432:5432 -e POSTGRES_DB=homeassistant-db -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=mysecretpassword -e PGDATA=/var/lib/postgresql/data/pgdata -v /apps/postgresql/data:/var/lib/postgresql/data postgres
