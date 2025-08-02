@@ -5,6 +5,8 @@ once install is complete, reboot machine and confirm that you can ssh with your 
 install bluetooth if your system have it 
 	sudo apt install bluetooth bluez
 install docker engine (https://docs.docker.com/engine/install/ubuntu/)
+	for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 configure docker to run from non-root user (https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
 install homeassistant, configuration will be store localy in /apps/homeassistant/config folder
 	sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
