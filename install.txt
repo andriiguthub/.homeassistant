@@ -16,3 +16,4 @@ docker run -d \
   -v /run/dbus:/run/dbus:ro \
   --network=host \
   ghcr.io/home-assistant/home-assistant:stable
+homeassistant is available on port 8123 on your ubuntu server
