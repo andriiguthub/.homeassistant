@@ -8,7 +8,7 @@ install docker engine (https://docs.docker.com/engine/install/ubuntu/)
 configure docker to run from non-root user (https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
 install homeassistant, configuration will be store localy in /apps/homeassistant/config folder
 	sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
-	docker run -d --name homeassistant --privileged --restart=unless-stopped -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host --device /dev/ttyUSB0:/dev/ttyUSB0 ghcr.io/home-assistant/home-assistant:stable
+	docker run -d --name homeassistant --privileged --restart=unless-stopped -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant/home-assistant:stable
 homeassistant is available on port 8123 on your ubuntu server
 
 my configuration steps
@@ -20,4 +20,8 @@ my configuration steps
 ## install postgress, data will be store localy in /apps/postgresql/data folder
 	sudo mkdir -p /apps/postgresql/data; sudo chown -R $USER /apps/postgresql/data; sudo chmod -R 0755 /apps/postgresql/data
 	docker run -d --name homeassistant-db --restart=unless-stopped -p 5432:5432 -e POSTGRES_DB=homeassistant-db -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=mysecretpassword -e PGDATA=/var/lib/postgresql/data/pgdata -v /apps/postgresql/data:/var/lib/postgresql/data postgres
-## install mqtt server
+## install mqtt server https://hub.docker.com/_/eclipse-mosquitto
+
+## install zigbee2mqtt https://www.zigbee2mqtt.io/guide/installation/02_docker.html#running-the-container
+
+#install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
