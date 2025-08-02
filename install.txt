@@ -23,6 +23,7 @@ my configuration steps
 sudo mkdir -p /apps/postgresql/data; sudo chown -R $USER /apps/postgresql/data; sudo chmod -R 0755 /apps/postgresql/data
 docker run -d \
 	--name some-postgres \
+	-e POSTGRES_USER=dbuser
 	-e POSTGRES_PASSWORD=mysecretpassword \
 	-e PGDATA=/var/lib/postgresql/data/pgdata \
 	-v /apps/postgresql/data:/var/lib/postgresql/data \
