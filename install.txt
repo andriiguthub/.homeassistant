@@ -1,0 +1,4 @@
+download ubuntu server (https://ubuntu.com/download/server/thank-you?version=25.04&architecture=amd64)
+prepare USB flash drive with BalenaEtcher (https://etcher.balena.io/)
+install ubuntu minimal server, do not forget to configure network interfaces and install openssh.
+once install is complete, reboot machine and confirm that you can ssh with your user account.
