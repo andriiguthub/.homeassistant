@@ -2,3 +2,5 @@ download ubuntu server (https://ubuntu.com/download/server/thank-you?version=25.
 prepare USB flash drive with BalenaEtcher (https://etcher.balena.io/)
 install ubuntu minimal server, do not forget to configure network interfaces and install openssh.
 once install is complete, reboot machine and confirm that you can ssh with your user account.
+install docker engine (https://docs.docker.com/engine/install/ubuntu/)
+configure docker to run from non-root user (https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
