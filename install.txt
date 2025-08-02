@@ -12,6 +12,7 @@ homeassistant is available on port 8123 on your ubuntu server
 my configuration steps
 	## configure homeassistant to use postgres
 	docker stop homeassistant; docker rm homeassistant
+	sudo rm /apps/homeassistant/config/home-assistant_v2.db
 	echo "recorder:" >> /apps/homeassistant/config/configuration.yaml
 	echo "  db_url: postgresql://dbuser:mysecretpassword@10.0.0.15/homeassistant-db" >> /apps/homeassistant/config/configuration.yaml
 ## install postgress, data will be store localy in /apps/postgresql/data folder
