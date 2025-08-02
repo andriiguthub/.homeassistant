@@ -20,3 +20,13 @@ run home assistant, specifying launch parameters
     --device /dev/ttyUSB0:/dev/ttyUSB0 \
     ghcr.io/home-assistant/home-assistant:stable
 homeassistant is available on port 8123 on your ubuntu server
+
+my configuration steps
+## install postgress
+sudo mkdir -p /apps/postgresql/data; sudo chown -R $USER /apps/postgresql/data; sudo chmod -R 0755 /apps/postgresql/data
+docker run -d \
+	--name some-postgres \
+	-e POSTGRES_PASSWORD=mysecretpassword \
+	-e PGDATA=/var/lib/postgresql/data/pgdata \
+	-v /apps/postgresql/data:/var/lib/postgresql/data \
+	postgres
