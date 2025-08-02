@@ -15,7 +15,7 @@ install homeassistant, configuration will be store localy in /apps/homeassistant
 	docker run -d --name homeassistant --privileged --restart=unless-stopped -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant/home-assistant:stable
 homeassistant is available on port 8123 on your ubuntu server
 
-my configuration steps
+my additional configuration steps
 ## configure homeassistant to use postgres
 	docker stop homeassistant; docker rm homeassistant
 	sudo rm /apps/homeassistant/config/home-assistant_v2.db
