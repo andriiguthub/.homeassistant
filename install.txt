@@ -4,16 +4,19 @@ install ubuntu minimal server, do not forget to configure network interfaces and
 once install is complete, reboot machine and confirm that you can ssh with your user account.
 install docker engine (https://docs.docker.com/engine/install/ubuntu/)
 configure docker to run from non-root user (https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
-download homeassistant docker image - docker pull ghcr.io/home-assistant/home-assistant:stable
-create folder for storing homeassistant configuration, say /apps/homeassistant - sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
+download homeassistant docker image
+  docker pull ghcr.io/home-assistant/home-assistant:stable
+create folder for storing homeassistant configuration, say /apps/homeassistant
+  sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
 run home assistant, specifying launch parameters
-docker run -d \
-  --name homeassistant \
-  --privileged \
-  --restart=unless-stopped \
-  -e TZ=America/Toronto \
-  -v /apps/homeassistant/config:/config \
-  -v /run/dbus:/run/dbus:ro \
-  --network=host \
-  ghcr.io/home-assistant/home-assistant:stable
+  docker run -d \
+    --name homeassistant \
+    --privileged \
+    --restart=unless-stopped \
+    -e TZ=America/Toronto \
+    -v /apps/homeassistant/config:/config \
+    -v /run/dbus:/run/dbus:ro \
+    --network=host \
+    --device /dev/ttyUSB0:/dev/ttyUSB0 \
+    ghcr.io/home-assistant/home-assistant:stable
 homeassistant is available on port 8123 on your ubuntu server
