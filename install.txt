@@ -5,4 +5,14 @@ once install is complete, reboot machine and confirm that you can ssh with your 
 install docker engine (https://docs.docker.com/engine/install/ubuntu/)
 configure docker to run from non-root user (https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
 download homeassistant docker image - 
-create folder for storing homeassistant configuration, say /apps/homeassistant
+create folder for storing homeassistant configuration, say /apps/homeassistant - mkdir -p /apps/homeassistant/config; chown -R $USER /apps/homeassistant/config; chmow -R 0755 /apps/homeassistant/config
+run home assistant, specifying launch parameters
+docker run -d \
+  --name homeassistant \
+  --privileged \
+  --restart=unless-stopped \
+  -e TZ=America/Toronto \
+  -v /apps/homeassistant/config:/config \
+  -v /run/dbus:/run/dbus:ro \
+  --network=host \
+  ghcr.io/home-assistant/home-assistant:stable
