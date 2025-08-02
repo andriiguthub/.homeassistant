@@ -18,3 +18,4 @@ my configuration steps
 ## install postgress, data will be store localy in /apps/postgresql/data folder
 	sudo mkdir -p /apps/postgresql/data; sudo chown -R $USER /apps/postgresql/data; sudo chmod -R 0755 /apps/postgresql/data
 	docker run -d --name homeassistant-db --restart=unless-stopped -p 5432:5432 -e POSTGRES_DB=homeassistant-db -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=mysecretpassword -e PGDATA=/var/lib/postgresql/data/pgdata -v /apps/postgresql/data:/var/lib/postgresql/data postgres
+## install mqtt server
