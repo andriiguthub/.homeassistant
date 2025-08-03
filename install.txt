@@ -26,7 +26,13 @@ my additional configuration steps
 	docker run -d --name homeassistant-db --restart=unless-stopped -p 5432:5432 -e POSTGRES_DB=homeassistant-db -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=mysecretpassword -e PGDATA=/var/lib/postgresql/data/pgdata -v /apps/postgresql/data:/var/lib/postgresql/data postgres
 ## install mqtt server https://hub.docker.com/_/eclipse-mosquitto
 	sudo mkdir -p /apps/mosquitto/config /apps/mosquitto/data /apps/mosquitto/log; sudo chown -R $USER /apps/mosquitto; sudo chmod -R 0755 /apps/mosquitto
+	echo "persistence true
+	persistence_location /mosquitto/data/
+	log_dest file /mosquitto/log/mosquitto.log
+	allow_anonymous false
+	password_file /mosquitto/config/passwd" >> /apps/mosquitto/config/mosquitto.conf
 	docker run -d  --name mqtt  -p 1883:1883 -v "/apps/mosquitto/config:/mosquitto/config" -v "/apps/mosquitto/data:/mosquitto/data" -v "/apps/mosquitto/log:/mosquitto/log" eclipse-mosquitto
+	docker exec mqtt mosquitto_passwd -b -c /mosquitto/config/passwd mqtt-user mqtt-password
 ## install zigbee2mqtt https://www.zigbee2mqtt.io/guide/installation/02_docker.html#running-the-container
 
 #install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
