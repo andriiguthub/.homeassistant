@@ -33,6 +33,7 @@ my additional configuration steps
 	password_file /mosquitto/config/passwd" >> /apps/mosquitto/config/mosquitto.conf
 	docker run -d  --name mqtt  -p 1883:1883 -v "/apps/mosquitto/config:/mosquitto/config" -v "/apps/mosquitto/data:/mosquitto/data" -v "/apps/mosquitto/log:/mosquitto/log" eclipse-mosquitto
 	docker exec mqtt mosquitto_passwd -b -c /mosquitto/config/passwd mqtt-user mqtt-password
+	https://www.home-assistant.io/integrations/mqtt
 ## install zigbee2mqtt https://www.zigbee2mqtt.io/guide/installation/02_docker.html#running-the-container
 
 #install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
