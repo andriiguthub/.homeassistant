@@ -37,5 +37,5 @@ my additional configuration steps
 	#https://www.home-assistant.io/integrations/mqtt
 ## install zigbee2mqtt https://www.zigbee2mqtt.io/guide/installation/02_docker.html#running-the-container
 	sudo mkdir -p /apps/zigbee2mqtt/data; sudo chown -R $USER /apps/zigbee2mqtt; sudo chmod -R 0755 /apps/zigbee2mqtt
-	docker run --name zigbee2mqtt --restart=unless-stopped --device=/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018ED3DDF-if00:/dev/ttyACM0 -p 8080:8080 -v $(pwd)/data:/app/data -v /run/udev:/run/udev:ro -e TZ=America/Toronto ghcr.io/koenkk/zigbee2mqtt
+	docker run --name zigbee2mqtt --restart=unless-stopped --device=/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_88729ed0803bec11a4d2a4957a0af07f-if00-port0:/dev/ttyACM0 -p 8080:8080 -v $(pwd)/data:/app/data -v /run/udev:/run/udev:ro -e TZ=America/Toronto ghcr.io/koenkk/zigbee2mqtt
 #install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
