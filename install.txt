@@ -42,3 +42,7 @@ my additional configuration steps
 #install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
 	sudo mkdir -p /apps/matter/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
 	docker run -d --name matter-server --restart=unless-stopped --security-opt apparmor=unconfined -v /apps/matter/data:/data -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant-libs/python-matter-server:stable --storage-path /data --paa-root-cert-dir /data/credentials --bluetooth-adapter 0
+
+#install rhasspy voice asistant service
+	sudo mkdir -p /apps/rhasspy/profiles; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
+	docker run -d -p 12101:12101 --name rhasspy --restart unless-stopped -v "/apps/rhasspy/profiles:/profiles" -v "/etc/localtime:/etc/localtime:ro" --device /dev/snd:/dev/snd rhasspy/rhasspy --user-profiles /profiles --profile en
