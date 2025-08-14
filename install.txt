@@ -46,3 +46,7 @@ my additional configuration steps
 #install rhasspy voice asistant service
 	sudo mkdir -p /apps/rhasspy/profiles; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
 	docker run -d -p 12101:12101 --name rhasspy --restart unless-stopped -v "/apps/rhasspy/profiles:/profiles" -v "/etc/localtime:/etc/localtime:ro" --device /dev/snd:/dev/snd rhasspy/rhasspy --user-profiles /profiles --profile en
+
+#install whisper
+	sudo mkdir -p /apps/whisper/models /apps/whisper/audio-files; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
+	docker run -it -v /apps/whisper/models:/root/.cache/whisper -v /apps/whisper/audio-files:/app openai-whisper whisper audio-file.mp3 --model turbo --language Italian --output_dir /app --output_format txt
