@@ -50,11 +50,11 @@ my additional configuration steps
 
 # install rhasspy voice asistant service
 	sudo mkdir -p /apps/rhasspy/profiles; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
-	docker run -d -p 12101:12101 --name rhasspy --restart unless-stopped -v "/apps/rhasspy/profiles:/profiles" -v "/etc/localtime:/etc/localtime:ro" --device /dev/snd:/dev/snd rhasspy/rhasspy --user-profiles /profiles --profile en
+	docker run -d -p 12101:12101 --name rhasspy --restart unless-stopped -v "/apps/rhasspy/profiles:/profiles" -v "/etc/localtime:/etc/localtime:ro" --device /dev/snd:/dev/snd rhasspy/rhasspy --user-profiles /profiles --profile ru
 
 # install whisper
 	sudo mkdir -p /apps/whisper/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
-	docker run -d -p 10300:10300 --name whisper --restart unless-stopped -v /apps/whisper/data:/data rhasspy/wyoming-whisper --model tiny-int8 --language en
+	docker run -d -p 10300:10300 --name whisper --restart unless-stopped -v /apps/whisper/data:/data rhasspy/wyoming-whisper --model tiny-int8 --language ru
 
 # install piper
 	sudo mkdir -p /apps/piper/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
