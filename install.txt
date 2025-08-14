@@ -58,4 +58,5 @@ my additional configuration steps
 
 # install piper
 	sudo mkdir -p /apps/piper/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
-	docker run -it -p 10200:10200 -v /apps/piper/data:/data rhasspy/wyoming-piper --voice en_US-lessac-medium
+	docker run -d -p 10200:10200 --name piper --restart unless-stopped -v /apps/piper/data:/data rhasspy/
+wyoming-piper --voice ru_RU-irina-medium
