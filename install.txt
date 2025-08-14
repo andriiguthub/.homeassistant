@@ -16,15 +16,18 @@ install homeassistant, configuration will be store localy in /apps/homeassistant
 homeassistant is available on port 8123 on your ubuntu server
 
 my additional configuration steps
-## configure homeassistant to use postgres
+
+# configure homeassistant to use postgres
 	docker stop homeassistant; docker rm homeassistant
 	sudo rm /apps/homeassistant/config/home-assistant_v2.db
 	echo "recorder:" >> /apps/homeassistant/config/configuration.yaml
 	echo "  db_url: postgresql://dbuser:mysecretpassword@10.0.0.15/homeassistant-db" >> /apps/homeassistant/config/configuration.yaml
-## install postgress, data will be store localy in /apps/postgresql/data folder
+
+# install postgress, data will be store localy in /apps/postgresql/data folder
 	sudo mkdir -p /apps/postgresql/data; sudo chown -R $USER /apps/postgresql/data; sudo chmod -R 0755 /apps/postgresql/data
 	docker run -d --name homeassistant-db --restart=unless-stopped -p 5432:5432 -e POSTGRES_DB=homeassistant-db -e POSTGRES_USER=dbuser -e POSTGRES_PASSWORD=mysecretpassword -e PGDATA=/var/lib/postgresql/data/pgdata -v /apps/postgresql/data:/var/lib/postgresql/data postgres
-## install mqtt server https://hub.docker.com/_/eclipse-mosquitto https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-18-04
+
+# install mqtt server https://hub.docker.com/_/eclipse-mosquitto https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-18-04
 	sudo mkdir -p /apps/mosquitto/config /apps/mosquitto/data /apps/mosquitto/log; sudo chown -R $USER /apps/mosquitto; sudo chmod -R 0755 /apps/mosquitto
 	echo "listen 1883
 	persistence true
@@ -35,19 +38,22 @@ my additional configuration steps
 	docker run -d --restart=unless-stopped --name mqtt  -p 1883:1883 -v "/apps/mosquitto/config:/mosquitto/config" -v "/apps/mosquitto/data:/mosquitto/data" -v "/apps/mosquitto/log:/mosquitto/log" eclipse-mosquitto
 	docker exec mqtt mosquitto_passwd -b -c /mosquitto/config/passwd mqtt-user mqtt-password
 	#https://www.home-assistant.io/integrations/mqtt
-## install zigbee2mqtt https://www.zigbee2mqtt.io/guide/installation/02_docker.html#running-the-container
+
+# install zigbee2mqtt https://www.zigbee2mqtt.io/guide/installation/02_docker.html#running-the-container
 	sudo mkdir -p /apps/zigbee2mqtt/data; sudo chown -R $USER /apps/zigbee2mqtt; sudo chmod -R 0755 /apps/zigbee2mqtt
 	ls -l /dev/serial/by-id
 	docker run -d --name zigbee2mqtt --restart=unless-stopped --device=/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_88729ed0803bec11a4d2a4957a0af07f-if00-port0:/dev/ttyUSB0 -p 8080:8080 -v /apps/zigbee2mqtt/data:/app/data -v /run/udev:/run/udev:ro -e TZ=America/Toronto ghcr.io/koenkk/zigbee2mqtt
-#install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
+
+# install matter server https://github.com/home-assistant-libs/python-matter-server/blob/main/docs/docker.md
 	sudo mkdir -p /apps/matter/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
 	docker run -d --name matter-server --restart=unless-stopped --security-opt apparmor=unconfined -v /apps/matter/data:/data -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant-libs/python-matter-server:stable --storage-path /data --paa-root-cert-dir /data/credentials --bluetooth-adapter 0
 
-#install rhasspy voice asistant service
+# install rhasspy voice asistant service
 	sudo mkdir -p /apps/rhasspy/profiles; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
 	docker run -d -p 12101:12101 --name rhasspy --restart unless-stopped -v "/apps/rhasspy/profiles:/profiles" -v "/etc/localtime:/etc/localtime:ro" --device /dev/snd:/dev/snd rhasspy/rhasspy --user-profiles /profiles --profile en
 
-#install whisper
+# install whisper
 	sudo mkdir -p /apps/whisper/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
 	docker run -d -p 10300:10300 --name whisper --restart unless-stopped -v /apps/whisper/data:/data rhasspy/wyoming-whisper --model tiny-int8 --language en
 
+# install piper
