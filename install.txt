@@ -57,3 +57,5 @@ my additional configuration steps
 	docker run -d -p 10300:10300 --name whisper --restart unless-stopped -v /apps/whisper/data:/data rhasspy/wyoming-whisper --model tiny-int8 --language en
 
 # install piper
+	sudo mkdir -p /apps/piper/data; sudo chown -R $USER /apps/; sudo chmod -R 0755 /apps/
+	docker run -it -p 10200:10200 -v /apps/piper/data:/data rhasspy/wyoming-piper --voice en_US-lessac-medium
