@@ -1,0 +1,118 @@
+alias: Light [Andrey]
+description: Control light in Andrey room with remote based on selected button
+triggers:
+  - domain: mqtt
+    device_id: 6e843524ae3360c777f4e16658cab552
+    type: action
+    subtype: brightness_move_down
+    trigger: device
+  - domain: mqtt
+    device_id: 6e843524ae3360c777f4e16658cab552
+    type: action
+    subtype: "off"
+    trigger: device
+  - domain: mqtt
+    device_id: 6e843524ae3360c777f4e16658cab552
+    type: action
+    subtype: "on"
+    trigger: device
+  - domain: mqtt
+    device_id: 6e843524ae3360c777f4e16658cab552
+    type: action
+    subtype: brightness_move_up
+    trigger: device
+  - domain: mqtt
+    device_id: 6e843524ae3360c777f4e16658cab552
+    type: action
+    subtype: arrow_left_click
+    trigger: device
+  - domain: mqtt
+    device_id: 6e843524ae3360c777f4e16658cab552
+    type: action
+    subtype: arrow_right_click
+    trigger: device
+conditions: []
+actions:
+  - action: logbook.log
+    metadata: {}
+    data:
+      message: |-
+        Triggered by: {{ trigger.id }} |
+                Topic: {{ trigger.topic }} |
+                Payload: {{ trigger.payload }}
+      domain: info
+      name: LOG Light [Andrey]
+    enabled: false
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'brightness_move_down' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              brightness_step_pct: -10
+            target:
+              area_id: andrey
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'on' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              brightness_pct: 100
+            target:
+              area_id: andrey
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'off' }}"
+        sequence:
+          - action: light.turn_off
+            metadata: {}
+            data: {}
+            target:
+              area_id: andrey
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'brightness_move_up' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              brightness_step_pct: 10
+            target:
+              area_id: andrey
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'arrow_right_click' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              color_temp_kelvin: >
+                {% set light = state_attr('light.ceiling_andrey',
+                'color_temp_kelvin') %} {% if light %}
+                  {{ (light * 1.1) | round(0) }}
+                {% else %}
+                  6500  # Fallback if current value is unknown
+                {% endif %}
+            target:
+              area_id: andrey
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'arrow_left_click' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              color_temp_kelvin: >
+                {% set light = state_attr('light.ceiling_andrey',
+                'color_temp_kelvin') %} {% if light %}
+                  {{ (light * 0.9) | round(0) }}
+                {% else %}
+                  4200  # Fallback if current value is unknown
+                {% endif %}
+            target:
+              area_id: andrey
+mode: single
