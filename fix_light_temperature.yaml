@@ -1,0 +1,63 @@
+alias: Light color
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - light.ceiling_andrey
+      - light.ceiling_kids
+    from: null
+    to: "on"
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: sun
+            before: sunrise
+            after: sunset
+        sequence:
+          - alias: Set warm color temp for ON lights in Andrey and Kids
+            repeat:
+              for_each:
+                - area_id: andrey
+                - area_id: kids
+              sequence:
+                - variables:
+                    lights: |
+                      {{ expand(area_entities(repeat.item.area_id)) 
+                         | selectattr('domain', 'equalto', 'light')
+                         | selectattr('state', 'equalto', 'on')
+                         | map(attribute='entity_id') 
+                         | list }}
+                - condition: template
+                  value_template: "{{ lights | length > 0 }}"
+                - target:
+                    entity_id: "{{ lights }}"
+                  data:
+                    color_temp_kelvin: 3500
+                  action: light.turn_on
+      - conditions:
+          - condition: sun
+            before: sunset
+            after: sunrise
+        sequence:
+          - alias: Set cool color temp for ON lights in Andrey and Kids
+            repeat:
+              for_each:
+                - area_id: andrey
+                - area_id: kids
+              sequence:
+                - variables:
+                    lights: |
+                      {{ expand(area_entities(repeat.item.area_id)) 
+                         | selectattr('domain', 'equalto', 'light')
+                         | selectattr('state', 'equalto', 'on')
+                         | map(attribute='entity_id') 
+                         | list }}
+                - condition: template
+                  value_template: "{{ lights | length > 0 }}"
+                - target:
+                    entity_id: "{{ lights }}"
+                  data:
+                    color_temp_kelvin: 5500
+                  action: light.turn_on
+mode: single
