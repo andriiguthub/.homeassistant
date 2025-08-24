@@ -1,5 +1,5 @@
-alias: Light [Andrey]
-description: Control light in Andrey room with remote based on selected button
+alias: Light 
+description: Control light in with IKEA of Sweden STYRBAR remote control
 triggers:
   - domain: mqtt
     device_id: 6e843524ae3360c777f4e16658cab552
@@ -41,7 +41,7 @@ actions:
                 Topic: {{ trigger.topic }} |
                 Payload: {{ trigger.payload }}
       domain: info
-      name: LOG Light [Andrey]
+      name: LOG Light 
     enabled: false
   - choose:
       - conditions:
@@ -98,7 +98,7 @@ actions:
                   6500  # Fallback if current value is unknown
                 {% endif %}
             target:
-              area_id: andrey
+              area_id: room
       - conditions:
           - condition: template
             value_template: "{{ trigger.payload == 'arrow_left_click' }}"
@@ -114,5 +114,5 @@ actions:
                   4200  # Fallback if current value is unknown
                 {% endif %}
             target:
-              area_id: andrey
+              area_id: room
 mode: single
