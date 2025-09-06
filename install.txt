@@ -12,7 +12,7 @@ configure docker to run from non-root user (https://docs.docker.com/engine/insta
 	sudo usermod -aG docker $USER
 install homeassistant, configuration will be store localy in /apps/homeassistant/config folder
 	sudo mkdir -p /apps/homeassistant/config; sudo chown -R $USER /apps/homeassistant/config; sudo chmod -R 0755 /apps/homeassistant/config
-	docker run -d --name homeassistant --privileged --restart=unless-stopped -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant/home-assistant:stable
+	docker run -d --name homeassistant --privileged --restart=unless-stopped -e TZ=America/Toronto -v /apps/homeassistant/config:/config -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant/home-assistant:2025.9
 homeassistant is available on port 8123 on your ubuntu server
 
 my additional configuration steps
