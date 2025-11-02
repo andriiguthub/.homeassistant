@@ -1,0 +1,116 @@
+alias: Light remote [kids]
+description: Control light in Andrey room with remote based on selected button
+triggers:
+  - domain: mqtt
+    device_id: d5b22c09acad5c0aadcf6a19b8e70c63
+    type: action
+    subtype: brightness_move_down
+    trigger: device
+  - domain: mqtt
+    device_id: d5b22c09acad5c0aadcf6a19b8e70c63
+    type: action
+    subtype: "off"
+    trigger: device
+  - domain: mqtt
+    device_id: d5b22c09acad5c0aadcf6a19b8e70c63
+    type: action
+    subtype: "on"
+    trigger: device
+  - domain: mqtt
+    device_id: d5b22c09acad5c0aadcf6a19b8e70c63
+    type: action
+    subtype: brightness_move_up
+    trigger: device
+  - domain: mqtt
+    device_id: d5b22c09acad5c0aadcf6a19b8e70c63
+    type: action
+    subtype: arrow_left_click
+    trigger: device
+  - domain: mqtt
+    device_id: d5b22c09acad5c0aadcf6a19b8e70c63
+    type: action
+    subtype: arrow_right_click
+    trigger: device
+conditions: []
+actions:
+  - action: logbook.log
+    metadata: {}
+    data:
+      message: |-
+        Triggered by: {{ trigger.id }} |
+                Topic: {{ trigger.topic }} |
+                Payload: {{ trigger.payload }}
+      domain: info
+      name: LOG Light [Kids]
+    enabled: false
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'brightness_move_down' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              brightness_step_pct: -10
+            target:
+              area_id: kids
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'on' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              brightness_pct: 100
+              color_temp_kelvin: 6500
+            target:
+              area_id: kids
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'off' }}"
+        sequence:
+          - action: light.turn_off
+            metadata: {}
+            data: {}
+            target:
+              area_id: kids
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'brightness_move_up' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              brightness_step_pct: 10
+            target:
+              area_id: kids
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'arrow_right_click' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              rgb_color:
+                - "{{ range(0, 254) | random }}"
+                - "{{ range(0, 254) | random }}"
+                - "{{ range(0, 254) | random }}"
+            target:
+              area_id: kids
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.payload == 'arrow_left_click' }}"
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data:
+              color_temp_kelvin: >
+                {% set light = state_attr('light.ceiling_kids',
+                'color_temp_kelvin') %} {% if light %}
+                  {{ (light * 0.9) | round(0) }}
+                {% else %}
+                  4400
+                {% endif %}
+            target:
+              area_id: kids
+mode: single
