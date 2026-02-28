@@ -1,0 +1,61 @@
+alias: "Hall light - Auto Brightness Adjustment"
+description: "Поддерживает освещенность: прибавляет яркость если <100 и убавляет если >200"
+triggers:
+  - trigger: state
+    entity_id: light.livingroom_ceiling_lights
+    to: "on"
+  - trigger: state
+    entity_id: sensor.motion_hall_illuminance # Реагируем на изменение света сразу
+conditions:
+  - condition: state
+    entity_id: light.livingroom_ceiling_lights
+    state: "on"
+actions:
+  - repeat:
+      # Цикл работает, пока свет включен И освещенность вне комфортной зоны (100-200)
+      while:
+        - condition: state
+          entity_id: light.livingroom_ceiling_lights
+          state: "on"
+        - condition: or
+          conditions:
+            - condition: numeric_state
+              entity_id: sensor.motion_hall_illuminance
+              below: 100
+            - condition: numeric_state
+              entity_id: sensor.motion_hall_illuminance
+              above: 200
+      sequence:
+        - choose:
+            # ВЕТКА 1: Слишком темно (<100) -> Свети ярче
+            - conditions:
+                - condition: numeric_state
+                  entity_id: sensor.motion_hall_illuminance
+                  below: 100
+                - condition: template
+                  value_template: "{{ state_attr('light.livingroom_ceiling_lights', 'brightness') | int(0) < 254 }}"
+              sequence:
+                - action: light.turn_on
+                  target:
+                    entity_id: light.livingroom_ceiling_lights
+                  data:
+                    brightness_step_pct: 10
+
+            # ВЕТКА 2: Слишком светло (>200) -> Свети тише
+            - conditions:
+                - condition: numeric_state
+                  entity_id: sensor.motion_hall_illuminance
+                  above: 200
+                - condition: template
+                  value_template: "{{ state_attr('light.livingroom_ceiling_lights', 'brightness') | int(0) > 10 }}"
+              sequence:
+                - action: light.turn_on
+                  target:
+                    entity_id: light.livingroom_ceiling_lights
+                  data:
+                    brightness_step_pct: -10
+
+        # Пауза 5-10 секунд, чтобы датчик освещенности успел обновиться
+        - delay:
+            seconds: 10
+mode: restart # Если освещенность резко изменилась, перезапускаем логику сначала
